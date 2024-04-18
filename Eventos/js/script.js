@@ -74,3 +74,54 @@ mouseEvents.addEventListener("dblclick", () => {
 // document.addEventListener("mousemove", (e) => {
 //     console.log(`No eixo X: ${e.x} e no eixo Y: ${e.y}`)
 // })
+
+
+//9 - evento de scroll
+window.addEventListener("scroll", (e) => {
+    if(window.pageYOffset > 200){
+        console.log("passamos de 200px")
+    }
+})
+
+
+//10 - eventos por focus/blur
+const input = document.querySelector("#my-input");
+input.addEventListener("focus", (e) => {
+    console.log("Entrou no imput")
+});
+input.addEventListener("blur", (e) => {
+    console.log("Saiu do imput")
+});
+
+
+//11 - Eventos de Loading Page
+window.addEventListener("load", () =>{
+    console.log("A página carregou!")
+});
+window.addEventListener("beforeunload", (e) =>{
+    e.preventDefault();
+    e.returnValue = "";
+});
+
+
+//12 - Debounce
+const debounce = (f, delay) => {
+
+    let timeout
+
+    return(...arguments) => {
+        if(timeout){
+            clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+            f.apply(arguments);
+        }, delay);
+    };
+
+};
+
+window.addEventListener("mousemove", 
+    debounce(() => {
+        console.log("Executando a cada 400ms");
+    }, 400)
+);
